@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SQLite03.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Start">
+            <Label FontSize="Header"
+                   Text="Empleados" />
+            <!--Entry Nombre-->
+            <Entry Placeholder="Nombre"
+                   Text="{Binding Nombre}"
+                   TextChanged="EntryNombre_TextChanged" />
+            <!--Entry Apellidos-->
+            <Entry Placeholder="Apellidos"
+                   Text="{Binding Apellidos}"
+                   TextChanged="EntryApellidos_TextChanged" />
+            <!--Botón Insertar-->
+            <Button Text="Insertar"
+                    Clicked="ButtonInsertar_Clicked" />
+
+
+            <CollectionView ItemsSource="{Binding OcTrabajadores}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedTrabajador}">
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="10">
+
+                            <!-- Muestra nombre -->
+                            <Label Text="{Binding Nombre}"
+                                   FontSize="Medium"
+                                   VerticalOptions="Center" />
+                            <!-- Muestra apellidos  -->
+                            <Label Text="{Binding Apellidos}"
+                                   FontSize="Medium"
+                                   VerticalOptions="Center"
+                                   Margin="10,0,0,0" />
+                            
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--Boton Eliminar-->
+            <Button Text="Eliminar"
+                    Clicked="ButtonEliminar_Clicked"
+                    IsEnabled="{Binding SelectedTrabajador}"/>
+            <!--Boton Actualizar-->
+            <Button Text="Actualizar"
+                    Clicked="ButtonActualizar_Clicked"
+                    IsEnabled="{Binding SelectedTrabajador}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
