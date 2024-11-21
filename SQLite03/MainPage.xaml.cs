@@ -68,9 +68,6 @@ namespace SQLite03
                 // Creamos la tabla de trabajador
                 CrearTablaTrabajador(connection);
 
-                // Insertamos unos registros de ejemplo
-                InsertarDatosEjemplo(connection);
-
                 // Creamos la consulta y la ejecutamos
                 string sql = "SELECT * FROM Trabajador";
                 SQLiteCommand command = new SQLiteCommand(sql, connection);
@@ -114,13 +111,6 @@ namespace SQLite03
         }
 
        
-
-        private void InsertarDatosEjemplo(SQLiteConnection connection)
-        {
-            EjecutarNonQuery(connection, "insert into Trabajador (nombre, apellidos) values ('Ana', 'Gómez')");
-            EjecutarNonQuery(connection, "insert into Trabajador (nombre, apellidos) values ('Juan', 'Pérez')");
-            
-        }
 
         private void EjecutarNonQuery(SQLiteConnection connection, string query)
         {
@@ -221,10 +211,26 @@ namespace SQLite03
             SelectedTrabajador = null;
         }
 
+        private void ListViewTrabajadores_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null)
+                return;
+
+            SelectedTrabajador = e.SelectedItem as Trabajador;
+
+            // Asignar los valores del trabajador seleccionado a los entries
+            _nombre = SelectedTrabajador.Nombre;
+            _apellidos = SelectedTrabajador.Apellidos;
+        }
+
         private void ButtonActualizar_Clicked(object sender, EventArgs e)
         {
             if (SelectedTrabajador == null)
                 return;
+
+            // Actualizar los valores del trabajador seleccionado con los valores de los entries
+            SelectedTrabajador.Nombre = _nombre;
+            SelectedTrabajador.Apellidos = _apellidos;
 
             // Creamos la ruta completa del fichero de la base de datos
             string rutaDirectorioApp = System.AppContext.BaseDirectory;
@@ -261,5 +267,6 @@ namespace SQLite03
                 OnPropertyChanged(nameof(OcTrabajadores));
             }
         }
+
     }
 }
