@@ -72,6 +72,7 @@ Actualizar: Seleccionar un trabajador, editar los Entry y presionar "Actualizar"
 Eliminar: Seleccionar un trabajador y presionar "Eliminar".
 
 Capturas de Pantalla
+
 Pantalla Inicio.png
 
 Contribución
